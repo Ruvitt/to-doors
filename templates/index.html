@@ -3,5 +3,33 @@
 {% block title %}Home{% endblock %}
 
 {% block conteudo %}
-    <h1>bem vindo: {{ nome }}</h1>
+<main class="container border my-3">
+    <div class="row">
+        <header class="col-md-12 mb-2 p-3">
+            <h1>To-doors</h1>
+            <hr>
+        </header>
+        <section class="col-12 mb-3">
+            <form method="POST" action="/adicionar-todo" class="d-flex align-items-center px-3 pt-3">
+                <label for="todo" class="form-label"></label>
+                <input type="text" id="todo" name="todo" class="form-control ">
+
+                <button type="submit" class="btn btn-primary ms-3">Adicionar</button>
+            </form>
+        </section>
+        <section class="col-12 mb-3">
+            <h2>Lista de to-dos</h2>
+            <hr>
+
+            <ul class="list-group">
+                {% for todo in todolist %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ todo['nome'] }}
+                    <a href="{{ url_for('remover_todo', id=todo['id'])}}" class="btn btn-danger">Excluir</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+    </div>
+</main>
 {% endblock %}
